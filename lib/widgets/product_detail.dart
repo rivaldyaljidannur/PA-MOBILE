@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ProductDetailPage extends StatelessWidget {
+class ProductDetail extends StatelessWidget {
   final String imagePath;
   final String name;
   final String date;
   final String description;
 
-  const ProductDetailPage({
+  const ProductDetail({
     super.key,
     required this.imagePath,
     required this.name,

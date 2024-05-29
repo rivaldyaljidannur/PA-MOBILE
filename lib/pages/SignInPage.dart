@@ -1,51 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:skena/pages/drop_page.dart';
-import 'package:skena/pages/news_page.dart';
-import 'package:skena/pages/saves_page.dart';
-import 'package:skena/pages/signup.dart';
-import 'package:skena/widgets/navbar.dart';
+import 'package:skena/pages/NewsPage.dart';
+import 'package:skena/pages/SignUpPage.dart';
+import 'package:skena/widgets/bottom_navbar.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInState extends State<SignIn> {
-  int _currentIndex = 3;
+class _SignInPageState extends State<SignInPage> {
+  final supabase = Supabase.instance.client;
 
-  void _onNavbarItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => NewsPage()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DropPage()),
-        );
-        break;
-      case 2:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SavedPage()));
-        break;
-      case 3:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
-        break;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  Future<void> signIn() async {
+    try {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Signing In...')));
+      await supabase.auth.signInWithPassword(
+        password: passwordController.text.trim(),
+        email: emailController.text.trim(),
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => NewsPage()),
+      );
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-
         actions: [
           // TextButton(
           //   onPressed: () {
@@ -71,14 +64,18 @@ class _SignInState extends State<SignIn> {
             const Text('Login with your HYPEABYSS account.'),
             const SizedBox(height: 16),
             TextFormField(
+              controller: emailController,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.email),
                 labelText: 'Login with Email',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             TextFormField(
+              controller: passwordController,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.lock),
                 labelText: 'Password',
@@ -89,7 +86,8 @@ class _SignInState extends State<SignIn> {
             const SizedBox(height: 16),
             ElevatedButton(
               child: Text("Login"),
-               onPressed: () {
+              onPressed: () {
+                signIn();
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
@@ -97,14 +95,18 @@ class _SignInState extends State<SignIn> {
             ),
             const SizedBox(height: 16),
             Row(
-              mainAxisAlignment:MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text("Doesn't Have Account?"),
-                TextButton(onPressed: (){Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const SignUp ()),
-                        );
-}, child: Text("Register Here"))
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignUpPage()),
+                      );
+                    },
+                    child: Text("Register Here"))
               ],
             ),
             const Text(
@@ -115,10 +117,6 @@ class _SignInState extends State<SignIn> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomNavbar(
-          currentIndex: _currentIndex,
-          onItemSelected: _onNavbarItemTapped,
-        ),
     );
   }
 }

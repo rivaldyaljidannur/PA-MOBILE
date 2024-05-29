@@ -1,19 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:skena/pages/NewsPage.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpPageState extends State<SignUpPage> {
+  final supabase = Supabase.instance.client;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Future<void> signUp() async {
+      try {
+        if (confirmPasswordController.text.trim() !=
+            passwordController.text.trim()) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Passwords do not match')));
+          return;
+        }
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Signing Up...')));
+        await supabase.auth.signUp(
+          password: passwordController.text.trim(),
+          email: emailController.text.trim(),
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NewsPage()),
+        );
+      } on AuthException catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.message)));
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
-        
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -32,6 +62,7 @@ class _SignUpState extends State<SignUp> {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                controller: emailController,
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
@@ -40,6 +71,7 @@ class _SignUpState extends State<SignUp> {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                controller: passwordController,
                 decoration: const InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
@@ -49,6 +81,7 @@ class _SignUpState extends State<SignUp> {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                controller: confirmPasswordController,
                 decoration: const InputDecoration(
                   labelText: 'Confirm Password',
                   border: OutlineInputBorder(),
@@ -65,7 +98,7 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  // Sign up action
+                  signUp();
                 },
                 child: const Text('Sign Up'),
                 style: ElevatedButton.styleFrom(
@@ -88,4 +121,3 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
-

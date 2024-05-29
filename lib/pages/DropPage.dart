@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:skena/pages/account_page.dart';
-import 'package:skena/pages/saves_page.dart';
-import 'package:skena/widgets/navbar.dart';
-import 'package:skena/pages/news_page.dart';
-// import 'package:skena/pages/saved_page.dart';
-// import 'package:skena/pages/account_page.dart';
-import 'package:skena/pages/product_detail_page.dart'; // Import halaman detail
+import 'package:skena/pages/NewsPage.dart';
+import 'package:skena/pages/SavedPage.dart';
+import 'package:skena/pages/SignInPage.dart';
+import 'package:skena/widgets/bottom_navbar.dart'; 
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+
+import 'package:skena/widgets/product_detail.dart'; // Untuk encoding dan decoding JSON
 
 class DropPage extends StatefulWidget {
   const DropPage({super.key});
@@ -15,33 +16,7 @@ class DropPage extends StatefulWidget {
 }
 
 class _DropPageState extends State<DropPage> {
-  int _currentIndex = 1;
 
-  void _onNavbarItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => NewsPage()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DropPage()),
-        );
-        break;
-      case 2:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SavedPage()));
-        break;
-      case 3:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +42,9 @@ class _DropPageState extends State<DropPage> {
             ReleasedTabContent(),
           ],
         ),
-        bottomNavigationBar: CustomNavbar(
-          currentIndex: _currentIndex,
-          onItemSelected: _onNavbarItemTapped,
-        ),
+       bottomNavigationBar: BottomNavbar(
+        currentIndex: 1,
+      ),
       ),
     );
   }
@@ -140,7 +114,7 @@ class ProductGrid extends StatelessWidget {
   }
 }
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends StatefulWidget {
   final String imagePath;
   final String name;
   final String date;
@@ -155,17 +129,59 @@ class ProductItem extends StatelessWidget {
   });
 
   @override
+  _ProductItemState createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
+  bool isSaved = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfSaved();
+  }
+
+  void _checkIfSaved() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> savedProducts = prefs.getStringList('savedProducts') ?? [];
+    setState(() {
+      isSaved = savedProducts.any((item) => json.decode(item)['name'] == widget.name);
+    });
+  }
+
+  void _toggleSaved(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> savedProducts = prefs.getStringList('savedProducts') ?? [];
+    if (isSaved) {
+      savedProducts.removeWhere((item) => json.decode(item)['name'] == widget.name);
+    } else {
+      Map<String, dynamic> product = {
+        'imagePath': widget.imagePath,
+        'name': widget.name,
+        'date': widget.date,
+        'description': widget.description,
+      };
+      savedProducts.add(json.encode(product));
+    }
+    await prefs.setStringList('savedProducts', savedProducts);
+    setState(() {
+      isSaved = !isSaved;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(isSaved ? 'Product saved!' : 'Product removed!')));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProductDetailPage(
-              imagePath: imagePath,
-              name: name,
-              date: date,
-              description: description,
+            builder: (context) => ProductDetail(
+              imagePath: widget.imagePath,
+              name: widget.name,
+              date: widget.date,
+              description: widget.description,
             ),
           ),
         );
@@ -174,26 +190,36 @@ class ProductItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-              height: 120,
-              width: double.infinity,
-            ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+              child: Image.asset(
+                widget.imagePath,
+                fit: BoxFit.cover,
+                height: 150,
+                width: double.infinity,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                widget.name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(date),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(widget.date),
+                  IconButton(
+                    icon: Icon(isSaved ? Icons.bookmark : Icons.bookmark_border),
+                    color: isSaved ? Colors.purple : Colors.grey,
+                    onPressed: () => _toggleSaved(context),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -279,25 +305,25 @@ class ReleasedTabContent extends StatelessWidget {
         ),
         ProductItem(
           imagePath: 'assets/images/agusjordan.jpg',
-          name: 'Air Jordan 4 GS “Messy Room”',
+          name: 'Air Jordan 4 GS "Messy Room"',
           date: 'Jan 07, 2023',
           description:''
         ),
         ProductItem(
           imagePath: 'assets/images/jordantrue.jpg',
-          name: 'Air Jordan 1 High OG “True Blue”',
+          name: 'Air Jordan 1 High OG "True Blue"',
           date: 'Jan 14, 2023',
           description: ''
         ),
         ProductItem(
           imagePath: 'assets/images/jordanhitam.jpg',
-          name: 'Air Jordan 7 GS “Barely Grape”',
+          name: 'Air Jordan 7 GS "Barely Grape"',
           date: 'Jan 24, 2023',
           description: ''
         ),
         ProductItem(
           imagePath: 'assets/images/jrdn.jpg',
-          name: 'Union x AJKO 1 Low “Sail”',
+          name: 'Union x AJKO 1 Low "Sail"',
           date: 'Feb 04, 2023',
           description: ''
         ),
