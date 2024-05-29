@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:skena/pages/NewsPage.dart';
-import 'package:skena/pages/SavedPage.dart';
-import 'package:skena/pages/SignInPage.dart';
 import 'package:skena/widgets/bottom_navbar.dart'; 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -17,11 +14,10 @@ class DropPage extends StatefulWidget {
 
 class _DropPageState extends State<DropPage> {
 
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Drops'),
@@ -42,7 +38,7 @@ class _DropPageState extends State<DropPage> {
             ReleasedTabContent(),
           ],
         ),
-       bottomNavigationBar: BottomNavbar(
+        bottomNavigationBar: BottomNavbar(
         currentIndex: 1,
       ),
       ),
@@ -69,9 +65,9 @@ class ProductGrid extends StatelessWidget {
         ),
         ProductItem(
           imagePath: 'assets/images/jordania.jpg',
-          name: 'AIR JORDAN 1 MID WMNS',
+          name: 'Air Jordan 1 MID WMNS',
           date: 'May 22, 2022',
-          description: 'After many months of waiting, the AIR JORDAN 1 MID WMNS is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description: 'After many months of waiting, the Air Jordan 1 MID WMNS is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordan34.jpg',
@@ -94,7 +90,7 @@ class ProductGrid extends StatelessWidget {
         ProductItem(
           imagePath: 'assets/images/jordan7.jpg',
           name: 'Air Jordan 7 GS "Chlorine Blue"',
-          date: 'Jan , 2021',
+          date: 'Jan 22, 2021',
           description: 'After many months of waiting, the Air Jordan 7 GS "Chlorine Blue" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(

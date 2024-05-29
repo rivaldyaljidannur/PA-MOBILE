@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:skena/pages/DropPage.dart';
-import 'package:skena/pages/SavedPage.dart';
 import 'package:skena/widgets/bottom_navbar.dart';
 import 'package:skena/widgets/showsearch.dart';
 
@@ -71,7 +69,7 @@ On Tuesday, reports surfaced indicating that adidas planned to proceed with its 
           Text('More News', style: TextStyle(fontFamily: 'Aroma', fontWeight: FontWeight.bold)),
           const Divider(),
           SizedBox(
-            height: 420, // Adjust height as needed
+            height: 400, // Adjust height as needed
             child: ListView(
               shrinkWrap: true,
               children: const [
