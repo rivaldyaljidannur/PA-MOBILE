@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:skena/pages/DropPage.dart';
-import 'package:skena/pages/NewsPage.dart';
-import 'package:skena/pages/SignInPage.dart';
 import 'dart:convert';
 import 'package:skena/widgets/bottom_navbar.dart';
 import 'package:skena/widgets/product_detail.dart';
+import 'package:intl/intl.dart';
 
 class SavedPage extends StatefulWidget {
   const SavedPage({super.key});
@@ -15,8 +13,6 @@ class SavedPage extends StatefulWidget {
 }
 
 class _SavedPageState extends State<SavedPage> {
-  int _currentIndex = 2;
-
   List<Map<String, dynamic>> savedArticles = [];
 
   @override
@@ -43,30 +39,23 @@ class _SavedPageState extends State<SavedPage> {
     });
   }
 
-  void _onNavbarItemTapped(int index) {
+  void _sortByName({bool ascending = true}) {
     setState(() {
-      _currentIndex = index;
+      savedArticles.sort((a, b) {
+        return ascending ? a['name'].compareTo(b['name']) : b['name'].compareTo(a['name']);
+      });
     });
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => NewsPage()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DropPage()),
-        );
-        break;
-      case 2:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SavedPage()));
-        break;
-      case 3:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()));
-        break;
-    }
+  }
+
+  void _sortByDate({bool ascending = true}) {
+    setState(() {
+      savedArticles.sort((a, b) {
+        DateFormat formatter = DateFormat('MMM dd, yyyy');
+        DateTime dateA = formatter.parse(a['date']);
+        DateTime dateB = formatter.parse(b['date']);
+        return ascending ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
+      });
+    });
   }
 
   @override
@@ -76,6 +65,35 @@ class _SavedPageState extends State<SavedPage> {
         title: const Text('Saved Articles'),
         centerTitle: true,
         automaticallyImplyLeading: false,
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              switch (value) {
+                case 'Name Ascending':
+                  _sortByName(ascending: true);
+                  break;
+                case 'Name Descending':
+                  _sortByName(ascending: false);
+                  break;
+                case 'Date Ascending':
+                  _sortByDate(ascending: true);
+                  break;
+                case 'Date Descending':
+                  _sortByDate(ascending: false);
+                  break;
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return {'Name Ascending', 'Name Descending', 'Date Ascending', 'Date Descending'}
+                  .map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+        ],
       ),
       body: savedArticles.isEmpty
           ? const Center(
@@ -109,7 +127,7 @@ class _SavedPageState extends State<SavedPage> {
                 );
               },
             ),
-            bottomNavigationBar: BottomNavbar(
+      bottomNavigationBar: BottomNavbar(
         currentIndex: 2,
       ),
     );

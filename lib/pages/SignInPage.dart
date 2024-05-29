@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skena/pages/NewsPage.dart';
 import 'package:skena/pages/SignUpPage.dart';
-import 'package:skena/widgets/bottom_navbar.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignInPage extends StatefulWidget {
