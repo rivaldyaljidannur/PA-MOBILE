@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skena/pages/NewsPage.dart';
-import 'package:skena/pages/SavedPage.dart';
-import 'package:skena/pages/SignInPage.dart';
-import 'package:skena/widgets/bottom_navbar.dart'; 
+import 'package:skena/widgets/Drawer.dart';
+import 'package:skena/widgets/bottom_navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -16,17 +14,27 @@ class DropPage extends StatefulWidget {
 }
 
 class _DropPageState extends State<DropPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
+        drawer: DrawerHype(),
         appBar: AppBar(
+          leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
           title: const Text('Drops'),
           centerTitle: true,
-          automaticallyImplyLeading: false, // Added this line to remove the back button
+          automaticallyImplyLeading:
+              false, // Added this line to remove the back button
           bottom: const TabBar(
             tabs: [
               Tab(text: 'POPULAR'),
@@ -42,9 +50,9 @@ class _DropPageState extends State<DropPage> {
             ReleasedTabContent(),
           ],
         ),
-       bottomNavigationBar: BottomNavbar(
-        currentIndex: 1,
-      ),
+        bottomNavigationBar: BottomNavbar(
+          currentIndex: 1,
+        ),
       ),
     );
   }
@@ -65,49 +73,57 @@ class ProductGrid extends StatelessWidget {
           imagePath: 'assets/images/yeezy.jpg',
           name: 'YEEZY BOOST 350 V2 "Glow-in-the-Dark"',
           date: 'May 24, 2019',
-          description: 'After many months of waiting, the YEEZY BOOST 350 V2 "Glow-in-the-Dark" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the YEEZY BOOST 350 V2 "Glow-in-the-Dark" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordania.jpg',
-          name: 'AIR JORDAN 1 MID WMNS',
+          name: 'Air Jordan 1 MID WMNS',
           date: 'May 22, 2022',
-          description: 'After many months of waiting, the AIR JORDAN 1 MID WMNS is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 1 MID WMNS is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordan34.jpg',
           name: 'Air Jordan 34 "CNY"',
           date: 'Jan 02, 2020',
-          description: 'After many months of waiting, the Air Jordan 34 "CNY" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 34 "CNY" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordan3gs.jpg',
           name: 'Air Jordan 3 GS',
           date: 'Jan 04, 2020',
-          description: 'After many months of waiting, the Air Jordan 3 GS is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 3 GS is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordanvolt.jpg',
           name: 'Air Jordan 1 High OG "Volt Gold"',
           date: 'Jan 09, 2021',
-          description: 'After many months of waiting, the Air Jordan 1 High OG "Volt Gold" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 1 High OG "Volt Gold" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordan7.jpg',
           name: 'Air Jordan 7 GS "Chlorine Blue"',
-          date: 'Jan , 2021',
-          description: 'After many months of waiting, the Air Jordan 7 GS "Chlorine Blue" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          date: 'Jan 22, 2021',
+          description:
+              'After many months of waiting, the Air Jordan 7 GS "Chlorine Blue" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordanchina.jpg',
           name: 'Air Jordan 1 Low OG "Chinese New Year"',
           date: 'Jan 31, 2021',
-          description: 'After many months of waiting, the Air Jordan 1 Low OG "Chinese New Year" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 1 Low OG "Chinese New Year" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordanroom.jpg',
           name: 'Trophy Room x Air Jordan 1 High OG',
           date: 'Feb 10, 2021',
-          description: 'After many months of waiting, the Trophy Room x Air Jordan 1 High OG is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Trophy Room x Air Jordan 1 High OG is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
       ],
     );
@@ -145,7 +161,8 @@ class _ProductItemState extends State<ProductItem> {
     final prefs = await SharedPreferences.getInstance();
     List<String> savedProducts = prefs.getStringList('savedProducts') ?? [];
     setState(() {
-      isSaved = savedProducts.any((item) => json.decode(item)['name'] == widget.name);
+      isSaved =
+          savedProducts.any((item) => json.decode(item)['name'] == widget.name);
     });
   }
 
@@ -153,7 +170,8 @@ class _ProductItemState extends State<ProductItem> {
     final prefs = await SharedPreferences.getInstance();
     List<String> savedProducts = prefs.getStringList('savedProducts') ?? [];
     if (isSaved) {
-      savedProducts.removeWhere((item) => json.decode(item)['name'] == widget.name);
+      savedProducts
+          .removeWhere((item) => json.decode(item)['name'] == widget.name);
     } else {
       Map<String, dynamic> product = {
         'imagePath': widget.imagePath,
@@ -167,7 +185,8 @@ class _ProductItemState extends State<ProductItem> {
     setState(() {
       isSaved = !isSaved;
     });
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(isSaved ? 'Product saved!' : 'Product removed!')));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(isSaved ? 'Product saved!' : 'Product removed!')));
   }
 
   @override
@@ -214,7 +233,8 @@ class _ProductItemState extends State<ProductItem> {
                 children: [
                   Text(widget.date),
                   IconButton(
-                    icon: Icon(isSaved ? Icons.bookmark : Icons.bookmark_border),
+                    icon:
+                        Icon(isSaved ? Icons.bookmark : Icons.bookmark_border),
                     color: isSaved ? Colors.purple : Colors.grey,
                     onPressed: () => _toggleSaved(context),
                   ),
@@ -243,37 +263,43 @@ class UpcomingTabContent extends StatelessWidget {
           imagePath: 'assets/images/jordantatum.jpeg',
           name: 'Jordan Tatum 1 "Tunnel Walk"',
           date: 'Jun 10, 2024',
-          description: 'After many months of waiting, the Jordan Tatum 1 "Tunnel Walk" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Jordan Tatum 1 "Tunnel Walk" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordanlow.jpg',
           name: 'Air Jordan 1 Low OG "Metallic Silver"',
           date: 'Jun 1, 2024',
-          description: 'After many months of waiting, the Air Jordan 1 Low OG "Metallic Silver" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 1 Low OG "Metallic Silver" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordan5.jpg',
           name: 'Air Jordan 5 GS "Miami Hurricanes"',
           date: 'June 05, 2024',
-          description: 'After many months of waiting, the Air Jordan 5 GS "Miami Hurricanes" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 5 GS "Miami Hurricanes" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordan6.jpg',
           name: 'Air Jordan 6 "Reverse Oreo"',
           date: 'June 06, 2024',
-          description: 'After many months of waiting, the Air Jordan 6 "Reverse Oreo" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 6 "Reverse Oreo" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordanloww.jpeg',
           name: 'Air Jordan 1 Low OG WMNS "Gorge Green"',
           date: 'June 12, 2024',
-          description: 'After many months of waiting, the Air Jordan 1 Low OG WMNS "Gorge Green" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 1 Low OG WMNS "Gorge Green" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordanmetal.jpg',
           name: 'Air Jordan 1 High 85 "Metallic Burgundy"',
           date: 'June 22, 2024',
-          description: 'After many months of waiting, the Air Jordan 1 High 85 "Metallic Burgundy" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 1 High 85 "Metallic Burgundy" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
       ],
     );
@@ -295,40 +321,37 @@ class ReleasedTabContent extends StatelessWidget {
           imagePath: 'assets/images/jordambiru.jpg',
           name: 'Air Jordan 4 "Military Blue"',
           date: 'May 04, 2024',
-          description: 'After many months of waiting, the Air Jordan 4 "Military Blue" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Air Jordan 4 "Military Blue" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
           imagePath: 'assets/images/jordanpink.jpg',
           name: 'Jordan Tatum 2 "Easter"',
           date: 'May 09, 2024',
-          description: 'After many months of waiting, the Jordan Tatum 2 "Easter" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
+          description:
+              'After many months of waiting, the Jordan Tatum 2 "Easter" is finally set to make its return, and is doing so in grand fashion. While presented in its traditional white leather, black and yellow build, the sneaker notably is accompanied by a briefcase that its high-top counterpart originally released with.',
         ),
         ProductItem(
-          imagePath: 'assets/images/agusjordan.jpg',
-          name: 'Air Jordan 4 GS "Messy Room"',
-          date: 'Jan 07, 2023',
-          description:''
-        ),
+            imagePath: 'assets/images/agusjordan.jpg',
+            name: 'Air Jordan 4 GS "Messy Room"',
+            date: 'Jan 07, 2023',
+            description: ''),
         ProductItem(
-          imagePath: 'assets/images/jordantrue.jpg',
-          name: 'Air Jordan 1 High OG "True Blue"',
-          date: 'Jan 14, 2023',
-          description: ''
-        ),
+            imagePath: 'assets/images/jordantrue.jpg',
+            name: 'Air Jordan 1 High OG "True Blue"',
+            date: 'Jan 14, 2023',
+            description: ''),
         ProductItem(
-          imagePath: 'assets/images/jordanhitam.jpg',
-          name: 'Air Jordan 7 GS "Barely Grape"',
-          date: 'Jan 24, 2023',
-          description: ''
-        ),
+            imagePath: 'assets/images/jordanhitam.jpg',
+            name: 'Air Jordan 7 GS "Barely Grape"',
+            date: 'Jan 24, 2023',
+            description: ''),
         ProductItem(
-          imagePath: 'assets/images/jrdn.jpg',
-          name: 'Union x AJKO 1 Low "Sail"',
-          date: 'Feb 04, 2023',
-          description: ''
-        ),
+            imagePath: 'assets/images/jrdn.jpg',
+            name: 'Union x AJKO 1 Low "Sail"',
+            date: 'Feb 04, 2023',
+            description: ''),
       ],
     );
   }
 }
-

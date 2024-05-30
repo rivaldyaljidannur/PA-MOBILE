@@ -45,12 +45,6 @@ class _BottomNavbarState extends State<BottomNavbar> {
           MaterialPageRoute(builder: (context) => const SavedPage()),
         );
         break;
-      case 3:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const SignInPage()),
-        );
-        break;
     }
   }
 

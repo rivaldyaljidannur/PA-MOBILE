@@ -26,10 +26,10 @@ class Mainpage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.purple),
       routes: {
-        '/': (context) => SignInPage(),
+        '/': (context) => const SignInPage(),
         '/drop': (context) => const DropPage(),
         '/save': (context) => const Text("Belum"),
-        '/account': (context) => const SignInPage(),
+        '/news': (context) => NewsPage(),
       },
     );
   }
