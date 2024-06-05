@@ -78,7 +78,7 @@ class _SavedPageState extends State<SavedPage> {
             );
           },
         ),
-        title: const Text('Saved Articles'),
+        title: Text('Saved Articles', style: TextStyle(color: Colors.purple[600]),),
         centerTitle: true,
         automaticallyImplyLeading: false,
         actions: <Widget>[

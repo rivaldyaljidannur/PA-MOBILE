@@ -43,7 +43,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: const Text(''),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -52,12 +52,12 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'HYPEBABYSS',
+                'Register For Skena Account',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               const Text(
-                'Register Account',
+                '',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),

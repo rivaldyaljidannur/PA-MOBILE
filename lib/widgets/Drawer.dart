@@ -34,14 +34,13 @@ class DrawerHype extends StatelessWidget {
                 children: [
                   Container(
                     decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 238, 35, 43)),
+                        color: Color.fromARGB(255, 177, 0, 175)),
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: const Text(
-                      'HYPEABYSS',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                      ),
+                    child: Image.asset(
+                      'assets/images/logo.png', // Pastikan path ke asset logo benar
+                      height: 100, // Atur ukuran logo sesuai kebutuhan
+                      width: 100, // Atur lebar logo sesuai kebutuhan
+                      fit: BoxFit.contain, // Atur bagaimana logo menyesuaikan dalam container
                     ),
                   ),
                 ],
@@ -51,7 +50,6 @@ class DrawerHype extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white
-                  
                 ),
                 onPressed: () {
                   signOut();

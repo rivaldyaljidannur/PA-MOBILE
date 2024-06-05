@@ -24,21 +24,11 @@ class _NewsPageState extends State<NewsPage> {
             );
           },
         ),
-        title: Text('HYPEABYSS'),
+        title: Text('Stylish Spotlight', style: TextStyle(color: Colors.purple[600], fontStyle: FontStyle.italic),),
         centerTitle: true,
         automaticallyImplyLeading:
             false, // Added this line to remove the back button
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: CustomSearchDelegate(),
-              );
-            },
-          ),
-        ],
+        
       ),
       body: Column(
         children: [
@@ -48,14 +38,14 @@ class _NewsPageState extends State<NewsPage> {
                   TextStyle(fontFamily: 'Aroma', fontWeight: FontWeight.bold)),
           const Divider(),
           SizedBox(
-            height: 200, // Adjust height as needed
+            height: 200,
             child: ListView(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               children: const [
                 ProductListTile(
-                  imageUrl: 'assets/images/yujikaneko2.jpg',
-                  title: 'Kunichi Nomura and the TRIPSTER x Vans Authentic',
+                  imageUrl: 'assets/images/yujikaneko3.jpg',
+                  title: '',
                   subtitle: '23 December 2023',
                   description:
                       'Kunichi Nomura is a Japanese writer, actor, radio personality, book editor, interior designer, creative director, and DJ from Tokyo, Japan.',
@@ -92,8 +82,7 @@ On Tuesday, reports surfaced indicating that adidas planned to proceed with its 
               style:
                   TextStyle(fontFamily: 'Aroma', fontWeight: FontWeight.bold)),
           const Divider(),
-          SizedBox(
-            height: 400, // Adjust height as needed
+          Expanded(
             child: ListView(
               shrinkWrap: true,
               children: const [
@@ -105,33 +94,33 @@ On Tuesday, reports surfaced indicating that adidas planned to proceed with its 
                   description:
                       'The sneakers pull inspiration from Japanese athletic aesthetics and craftsmanship, with running performance and principles at the core of the design.',
                   text:
-                      """Off-White™ is giving “BRB” a whole new meaning. After inundating its Instagram page with a slew of “BRB” teasers – at first remaining ominous and office-themed in nature, spotlighting sticky notes stamped “BRB” – the imprint has unveiled its newest inline footwear offering: a runner dubbed the “Be Right Back” sneaker.However, as for the “Be Right Back” colorway, Off-White™ looks to the hues of New York City’s public transit, dipping the runner in shades of bright blue, yellow and silver in homage to the city’s bus system.Built from a combination of mesh and rubberized leather, the sneakers are stamped with a slew of Off-White™ brand hits – on the heel, tongue and insole – and also introduces a new “Arrow language.”“an invitation to “BE WELL”, the “BRB” facilitates moments of ‘you time’ to get you from where you’ve been to where you’re going,” the brand wrote in an Instagram caption. “the sneaker itself takes design cues from ’90s performance running shoes, parlaying them into an everyday silhouette infused with iconic references.”
-                    Take a closer look at the shoes the gallery below.“The sneaker itself takes design cues from ’90s performance running shoes, parlaying them into an everyday silhouette infused with iconic references. exclusive NYC colorway out now with further limited-edition releases inspired by the cities of Miami, Milan and Paris slated for release in the coming weeks,” the label continues.""",
+                      """Off-White™ is giving "BRB" a whole new meaning. After inundating its Instagram page with a slew of "BRB" teasers – at first remaining ominous and office-themed in nature, spotlighting sticky notes stamped "BRB" – the imprint has unveiled its newest inline footwear offering: a runner dubbed the "Be Right Back" sneaker.However, as for the "Be Right Back" colorway, Off-White™ looks to the hues of New York City's public transit, dipping the runner in shades of bright blue, yellow and silver in homage to the city's bus system.Built from a combination of mesh and rubberized leather, the sneakers are stamped with a slew of Off-White™ brand hits – on the heel, tongue and insole – and also introduces a new "Arrow language.""an invitation to "BE WELL", the "BRB" facilitates moments of 'you time' to get you from where you've been to where you're going," the brand wrote in an Instagram caption. "the sneaker itself takes design cues from '90s performance running shoes, parlaying them into an everyday silhouette infused with iconic references."
+                    Take a closer look at the shoes the gallery below."The sneaker itself takes design cues from '90s performance running shoes, parlaying them into an everyday silhouette infused with iconic references. exclusive NYC colorway out now with further limited-edition releases inspired by the cities of Miami, Milan and Paris slated for release in the coming weeks," the label continues.""",
                 ),
                 ProductListTile(
                   imageUrl: 'assets/images/hoka.jpg',
                   title:
-                      """WTAPS Puts Its Spin on Two of HOKA’s Most Popular Models""",
+                      """WTAPS Puts Its Spin on Two of HOKA's Most Popular Models""",
                   subtitle: '24 May, 2024',
                   description:
                       'Japanese streetwear label WTAPS is joining forces with HOKA',
                   text:
-                      """reimagining two of the footwear brand’s best-selling silhouettes: the Anacapa GTX Low and the Ora Luxe Slide. Imbued with WTAPS’ signature military-inspired streetwear aesthetics, the two footwear styles are each offered in “Black” and “Four Leaf Clover” colorways.
-                    As a versatile day hike model, the collaborative Anacapa GTX Low retains its original functionalities with a breathable and sturdy build. Its upper boasts a mesh and suede fabrication, topped with TPU overlays as well as a weather-resistant GORE-TEX coating. Its outsoles are integrated with Vibram’s Megagrip technology which prevents slipping even on wet and uneven terrains.
-                    As for the Ora Luxe Slide, the sandals retain their purpose for post-run recovery while sporting a tonal new look. WTAPS’ signature cross-bones motif adorns the strap, serving low-key embellishments as well as a nod to its collaborative status.
-                    The aforementioned WTAPS x HOKA collaborative styles will be available starting May 24 through WTAPS’ online and offline stores. The HOKA Ora Luxe is set to retail for 90 USD), while the Anacapa Low GTX has a price point of 190 USD).""",
+                      """reimagining two of the footwear brand's best-selling silhouettes: the Anacapa GTX Low and the Ora Luxe Slide. Imbued with WTAPS' signature military-inspired streetwear aesthetics, the two footwear styles are each offered in "Black" and "Four Leaf Clover" colorways.
+                    As a versatile day hike model, the collaborative Anacapa GTX Low retains its original functionalities with a breathable and sturdy build. Its upper boasts a mesh and suede fabrication, topped with TPU overlays as well as a weather-resistant GORE-TEX coating. Its outsoles are integrated with Vibram's Megagrip technology which prevents slipping even on wet and uneven terrains.
+                    As for the Ora Luxe Slide, the sandals retain their purpose for post-run recovery while sporting a tonal new look. WTAPS' signature cross-bones motif adorns the strap, serving low-key embellishments as well as a nod to its collaborative status.
+                    The aforementioned WTAPS x HOKA collaborative styles will be available starting May 24 through WTAPS' online and offline stores. The HOKA Ora Luxe is set to retail for 90 USD), while the Anacapa Low GTX has a price point of 190 USD).""",
                 ),
                 ProductListTile(
                     imageUrl: 'assets/images/jordambiru.jpg',
                     title:
-                        """The Nike Dunk Low Gets a Timeless “White/Navy” Treatment""",
+                        """The Nike Dunk Low Gets a Timeless "White/Navy" Treatment""",
                     subtitle: '24 May, 2024',
                     description: 'A clean white look arrives.',
                     text:
-                        """With the summer season in full swing, it’s time to start getting ready for the inevitable vacation plans and spontaneous beach days. Of course, that also means that it’s time to start breaking out the crisp summer whites.
-                        Enter the latest offering of the Nike Dunk Low. While the label has yet to reveal any official information on this colorway’s release, the shoe is dressed in a simple white and navy color scheme, utilizing a smooth leather construction.
-                        Its understated look is contrasted with navy Swooshes, laces, and tongue tags while “Nike” is embroidered on the heel in a matching hue. Completing the design is a white midsole paired with a navy rubber outsole.
-                        Check out the photos above and stay tuned for more release details on the upcoming Nike Dunk Low “White/Navy” iteration. In case you missed it, the Nike Dunk Low “Rugged Orange” is also dropping soon. The Nike Dunk Low “Rugged Orange” is also dropping soon."""),
+                        """With the summer season in full swing, it's time to start getting ready for the inevitable vacation plans and spontaneous beach days. Of course, that also means that it's time to start breaking out the crisp summer whites.
+                        Enter the latest offering of the Nike Dunk Low. While the label has yet to reveal any official information on this colorway's release, the shoe is dressed in a simple white and navy color scheme, utilizing a smooth leather construction.
+                        Its understated look is contrasted with navy Swooshes, laces, and tongue tags while "Nike" is embroidered on the heel in a matching hue. Completing the design is a white midsole paired with a navy rubber outsole.
+                        Check out the photos above and stay tuned for more release details on the upcoming Nike Dunk Low "White/Navy" iteration. In case you missed it, the Nike Dunk Low "Rugged Orange" is also dropping soon. The Nike Dunk Low "Rugged Orange" is also dropping soon."""),
                 // Add more items as needed
               ],
             ),

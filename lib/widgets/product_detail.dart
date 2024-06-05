@@ -79,7 +79,7 @@ class _ProductDetailState extends State<ProductDetail> {
             Image.asset(
               widget.imagePath,
               fit: BoxFit.cover,
-              height: 200,
+              height: 400,
               width: double.infinity,
             ),
             const SizedBox(height: 16),

@@ -26,7 +26,7 @@ class Mainpage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.purple),
       routes: {
-        '/': (context) => const SignInPage(),
+        '/': (context) => SignInPage(),
         '/drop': (context) => const DropPage(),
         '/save': (context) => const Text("Belum"),
         '/news': (context) => NewsPage(),

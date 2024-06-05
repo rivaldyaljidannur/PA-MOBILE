@@ -37,18 +37,6 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
-        actions: [
-          // TextButton(
-          //   onPressed: () {
-          //     // Close action
-          //   },
-          //   child: const Text(
-          //     'Close',
-          //     style: TextStyle(color: Colors.black),
-          //   ),
-          // ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -56,11 +44,11 @@ class _SignInPageState extends State<SignInPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Welcome to HYPEABYSS",
+              "Welcome to Skena",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text('Login with your HYPEABYSS account.'),
+            const Text('The inspiration skena for your outfit.'),
             const SizedBox(height: 16),
             TextFormField(
               controller: emailController,
